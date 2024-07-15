@@ -10,31 +10,30 @@ import Nav from './component/GY_Nav';
 import MovieList from './component/MovieList';
 import SearchBar from './component/SearchBar';
 
-
 const TomatoBack = styled.div`
   background-color: #ffffff;
   min-height: 100vh;
-    `;
+`;
 
 const TomatoLogo = styled.h1`
-  color: tomato; 
+  color: tomato;
   font-size: 100px;
   font-weight: 600;
   //-webkit-text-stroke: 2px tomato;
   display: flex;
-`
+`;
 
 const LogoContainer = styled.div`
   display: flex;
   justify-content: center;
-`
+`;
 
 // 새로운 Home 컴포넌트 추가
 const Home = () => {
   return (
     <div>
       <LogoContainer>
-      <TomatoLogo> Fresh Tomato </TomatoLogo>
+        <TomatoLogo> Fresh Tomato </TomatoLogo>
       </LogoContainer>
       <SearchBar placeholder="EX: 인사이드아웃2" />
       <MovieList />
@@ -46,9 +45,10 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: (
-    <TomatoBack>
-      <Nav />
-    </TomatoBack>),
+      <TomatoBack>
+        <Nav />
+      </TomatoBack>
+    ),
     children: [
       {
         path: '/',
