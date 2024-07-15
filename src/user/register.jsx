@@ -27,7 +27,7 @@ export default function Register() {
       setPassword1("")
       setPassword2("")
       setNickname("")
-      setCookie("access", response.data.access);
+      localStorage.setItem("access", response.data.access);
     } catch (error) {
       return error;
     }
