@@ -1,10 +1,16 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const MovieList = () => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate('/detail');
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -48,6 +54,7 @@ const MovieList = () => {
           <li key={movie.id} style={{ margin: '0.5rem' }}>
             <h2>{movie.title_kor}</h2>
             <img src={movie.poster_url} alt={movie.title_kor} style={{ maxWidth: '100%' }} />
+            <button onClick={handleClick}>상세보기</button>
           </li>
         ))}
       </ul>

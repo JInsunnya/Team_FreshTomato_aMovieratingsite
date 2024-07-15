@@ -38,7 +38,7 @@ function Detail() {
   useEffect(() => {
     const detailMovie = async (id) => {
       try {
-        const response = await apiCall.get(`/${id}`);
+        const response = await apiCall.get(`/1`);
         console.log(response);
         setMovie(response.data);
       } catch (error) {

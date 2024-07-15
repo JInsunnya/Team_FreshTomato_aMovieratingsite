@@ -9,6 +9,7 @@ import Register from './user/register';
 import Nav from './component/GY_Nav';
 import MovieList from './component/MovieList';
 import SearchBar from './component/SearchBar';
+import Detail from './detail';
 
 const TomatoBack = styled.div`
   background-color: #ffffff;
@@ -64,6 +65,10 @@ const router = createBrowserRouter([
       {
         path: '/Signup',
         element: <Register />,
+      },
+      {
+        path: '/detail',
+        element: <Detail/>,
       },
     ],
   },
