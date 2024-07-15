@@ -11,7 +11,7 @@ import Register from './user/register';
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Login/>,
+    //element: <Login/>,
     //element: <Register/>,
   },
 ]);

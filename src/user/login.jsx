@@ -12,7 +12,7 @@ export default function Login() {
   return(
     <div className="login-page">
     <LoginSpace>
-      <h1>Sign in</h1>
+      <h1>Login</h1>
       <LoginWindow>
         <input
           type="text"
