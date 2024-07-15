@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const LoginSpace = styled.div`
-  margin: 20%;
+  margin: 80px 20%;
   padding: 0;
   display: flex;
   flex-direction: column;
@@ -65,13 +65,13 @@ const LoginHelp = styled.div`
 `
 
 const RegisterSpace = styled.div`
-  margin: 20%;
+  margin: 80px 20%;
   padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 30px;
+  font-size: 25px;
   background-color: #FFF4EF;
   color: #ff6347;
 
@@ -100,6 +100,9 @@ const RegisterInput = styled.div`
   input {
     width: 250px;
     height: 30px;
+    border-color: #a43f2e;
+    border-width: 1px;
+    border-style: solid;
   }
 `
 
