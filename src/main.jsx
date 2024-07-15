@@ -5,10 +5,13 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-//import Login from './user/login';
-//import Register from './user/register';
-import App from "./App"
 
+
+import Login from './user/login';
+import Register from './user/register';
+import App from "./App"
+import Nav from './component/GY_Nav';
+import MovieList from './component/MovieList';
 const router = createBrowserRouter([
   {
     path: "/",
