@@ -12,16 +12,28 @@ import App from "./App"
 const router = createBrowserRouter([
   {
     path: "/",
-    //element: <Login/>,
-    //element: <Register/>,
+    //element: <App/>,
+    element: <Nav/>,
+    children: [
+      {
+        element: <MovieList/>,
+        index: true,
+      },
+      {
+        path: "/Login",
+        element:<Login/>,
+      },
+      {
+        path: "/Signup",
+        element:<Register/>,
+      }
+    ],
   },
 ]);
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router} />,
-    <App />
-  </React.StrictMode>,
-  
-)
+    <RouterProvider router={router} />
+  </React.StrictMode>
+);
