@@ -9,13 +9,15 @@ const MovieList = () => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate('/detail');
+    navigate('/detail/:id');
   };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://port-0-minihackathon-12-lyec0qpi97716ac6.sel5.cloudtype.app/movie/list');
+        const response = await axios.get(
+          'https://port-0-minihackathon-12-lyec0qpi97716ac6.sel5.cloudtype.app/movie/list'
+        );
         // API에서 가져온 영화 데이터를 변수에 저장
         let movieData = response.data;
 
@@ -25,7 +27,7 @@ const MovieList = () => {
         setMovies(movieData); // 전체 영화 데이터를 설정
         setLoading(false);
       } catch (error) {
-        console.error("에러 발생:", error);
+        console.error('에러 발생:', error);
         setError(error);
         setLoading(false);
       }
@@ -48,12 +50,15 @@ const MovieList = () => {
 
   return (
     <div>
-      
       <ul style={{ display: 'flex', listStyle: 'none', padding: 0 }}>
-        {movies.map(movie => (
+        {movies.map((movie) => (
           <li key={movie.id} style={{ margin: '0.5rem' }}>
             <h2>{movie.title_kor}</h2>
-            <img src={movie.poster_url} alt={movie.title_kor} style={{ maxWidth: '100%' }} />
+            <img
+              src={movie.poster_url}
+              alt={movie.title_kor}
+              style={{ maxWidth: '100%' }}
+            />
             <button onClick={handleClick}>상세보기</button>
           </li>
         ))}

@@ -1,28 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+// import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import './detailcss.css';
 
 function Detail() {
   const [movie, setMovie] = useState(null);
-  const [posts, setPosts] = useState([]);
+  // const [posts, setPosts] = useState([]);
   // const [token, setToken] = useState('');
-  const { state } = useLocation();
+  // const { state } = useLocation();
   // const navigate = useNavigate();
-  const location = useLocation();
+  // const location = useLocation();
   const [id, setId] = useState(1);
+  // const { id } = useParams();
   const [comment, setComment] = useState('');
   // const Tofeed = (postId) => {
   //   navigate(`/modifys`, { state: { id: postId } });
   // };
-
-  const handleCommentChange = (event) => {
-    setComment(event.target.value);
-  };
+  // const id = state?.id || '';
 
   const apiCall = axios.create({
-    baseURL:
-      'https://port-0-minihackathon-12-lyec0qpi97716ac6.sel5.cloudtype.app/movie',
+    baseURL: 'https://freshtomato.store/',
   });
 
   // const handleClick = () => {
@@ -31,33 +29,27 @@ function Detail() {
 
   // console.log(token);
 
-  // useEffect(() => {
-  //   const storedToken = localStorage.getItem('token');
-  //   setToken(storedToken);
-  // }, []);
   useEffect(() => {
-    const detailMovie = async (id) => {
+    const detailMovie = async () => {
       try {
-        const response = await apiCall.get(`/1`);
+        const response = await apiCall.get(`/Movie/movie_detail/${id}/`);
         console.log(response);
         setMovie(response.data);
       } catch (error) {
         console.log('Error movie data:', error);
       }
     };
-    detailMovie(id);
+    detailMovie();
   }, []);
 
-  // useEffect(() => {
-  //   if (token) {
-  //     list(id, token);
-  //   }
-  // }, [id, token]);
+  const handleCommentChange = (event) => {
+    setComment(event.target.value);
+  };
 
   return (
     <div>
       ddd
-      <div>
+      {/* <div>
         <h1>
           <span className="kortitle">{movie.title_kor}</span>
           <span className="engtitle">{movie.title_eng}</span>
@@ -129,7 +121,7 @@ function Detail() {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
