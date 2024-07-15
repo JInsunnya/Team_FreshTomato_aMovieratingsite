@@ -5,8 +5,8 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import Login from './user/login';
-import Register from './user/register';
+//import Login from './user/login';
+//import Register from './user/register';
 
 const router = createBrowserRouter([
   {
@@ -19,6 +19,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
+    <RouterProvider router={router} />,
+    <App />
+  </React.StrictMode>,
+  
 )
