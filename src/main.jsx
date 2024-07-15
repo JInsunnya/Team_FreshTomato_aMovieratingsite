@@ -36,7 +36,6 @@ const Home = () => {
       <TomatoLogo> Fresh Tomato
       <img width="96" height="96" src="https://img.icons8.com/doodle/96/000000/tomato--v1.png" alt="tomato--v1"/>
       </TomatoLogo>
-        <TomatoLogo> Fresh Tomato </TomatoLogo>
       </LogoContainer>
       <SearchBar placeholder="EX: 인사이드아웃2" />
       <MovieList />
