@@ -1,38 +1,74 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
+
+const MovieListContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+`;
+
+const MovieItem = styled.div`
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 200px;
+  text-align: center;
+`;
+
+const MovieTitle = styled.h2`
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+`;
+
+const MovieImage = styled.img`
+  max-width: 100%;
+  height: auto;
+`;
 
 const MovieList = () => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [perPage] = useState(20); // 한 페이지에 보여질 항목 수
   const navigate = useNavigate();
-
-  const handleClick = () => {
-    navigate('/detail');
-  };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://port-0-minihackathon-12-lyec0qpi97716ac6.sel5.cloudtype.app/movie/list');
-        // API에서 가져온 영화 데이터를 변수에 저장
+        const response = await axios.get(
+          'https://port-0-minihackathon-12-lyec0qpi97716ac6.sel5.cloudtype.app/movie/list'
+        );
         let movieData = response.data;
-
-        // 처음 10개의 영화 데이터만 추출
-        movieData = movieData.slice(0, 10);
-
-        setMovies(movieData); // 전체 영화 데이터를 설정
+        movieData = movieData.slice(0, 20);
+        setMovies(movieData);
         setLoading(false);
       } catch (error) {
-        console.error("에러 발생:", error);
+        console.error('에러 발생:', error);
         setError(error);
         setLoading(false);
       }
     };
 
     fetchData();
-  }, []);
+  }, [currentPage]);
+
+  const handleNextPage = () => {
+    setCurrentPage(currentPage + 1);
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleClick = (id) => {
+    navigate(`/detail/${id}`);
+  };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -48,16 +84,20 @@ const MovieList = () => {
 
   return (
     <div>
-      
-      <ul style={{ display: 'flex', listStyle: 'none', padding: 0 }}>
-        {movies.map(movie => (
-          <li key={movie.id} style={{ margin: '0.5rem' }}>
-            <h2>{movie.title_kor}</h2>
-            <img src={movie.poster_url} alt={movie.title_kor} style={{ maxWidth: '100%' }} />
-            <button onClick={handleClick}>상세보기</button>
-          </li>
+      <MovieListContainer>
+        {movies.map((movie) => (
+          <MovieItem key={movie.id} onClick={() => handleClick(movie.id)}>
+            <MovieTitle>{movie.title_kor}</MovieTitle>
+            <MovieImage src={movie.poster_url} alt={movie.title_kor} />
+          </MovieItem>
         ))}
-      </ul>
+      </MovieListContainer>
+      <div>
+        <button onClick={handlePrevPage} disabled={currentPage === 1}>
+          이전 페이지
+        </button>
+        <button onClick={handleNextPage}>다음 페이지</button>
+      </div>
     </div>
   );
 };
