@@ -1,27 +1,34 @@
 import React, {useState} from "react";
 import {LoginSpace, LoginWindow, LoginHelp} from "./styles-cr";
+import axios from 'axios';
 
 export default function Login() {
-  {/*const [userId, setuserId] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const api = axios.create({
+    baseURL:
+      'https://freshtomato.store/',
+  });
   
   const login = async () => {
     try {
-      const response = await api.post("", {
-        username: userId,
+      const response = await api.post("/dj/login/", {
+        username: username,
         password: password,
       })
       console.log('로그인 성공', response.data)
-      setuserId("")
+      setUsername("")
       setPassword("")
       localStorage.setItem("access", response.data.access)
     } catch (error) {
       console.error('에러: ', error)
+      setUsername("")
+      setPassword("")
       return error;
     }
   }
   localStorage.getItem("access")
-*/}
+
   return(
     <div className="login-page">
     <LoginSpace>
@@ -29,17 +36,17 @@ export default function Login() {
       <LoginWindow>
         <input
           type="text"
-          //value={userId}
-          //onChange={(e) => setUserId(e.target.value)}
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
           placeholder="Id"
         />
         <input
-          type="pass"
-          //value={password}
-          //onChange={(e) => setPassword(e.target.value)}
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
         />
-        <button>로그인</button>
+        <button onClick={login}>로그인</button>
         <LoginHelp>
         <a href="">ID/PW 찾기</a>
         <a href="/Signup">회원가입하기</a>

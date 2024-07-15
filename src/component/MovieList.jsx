@@ -36,7 +36,7 @@ const MovieList = () => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate('/detail');
+    navigate('/detail/:id');
   };
 
   useEffect(() => {
@@ -48,7 +48,7 @@ const MovieList = () => {
         setMovies(movieData);
         setLoading(false);
       } catch (error) {
-        console.error("에러 발생:", error);
+        console.error('에러 발생:', error);
         setError(error);
         setLoading(false);
       }
