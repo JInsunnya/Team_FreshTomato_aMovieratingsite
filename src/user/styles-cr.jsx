@@ -99,10 +99,11 @@ const RegisterInput = styled.div`
 
   input {
     width: 250px;
-    height: 30px;
-    border-color: #a43f2e;
-    border-width: 1px;
+    height: 35px;
     border-style: solid;
+    border-width: 0.1px;
+    background-color: #ffffff;
+    border-color: tomato;
   }
 `
 
