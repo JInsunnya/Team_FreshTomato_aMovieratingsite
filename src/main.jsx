@@ -11,6 +11,7 @@ import MovieList from './component/MovieList';
 import SearchBar from './component/SearchBar';
 
 
+
 const TomatoBack = styled.div`
   background-color: #ffffff;
   min-height: 100vh;
@@ -34,7 +35,9 @@ const Home = () => {
   return (
     <div>
       <LogoContainer>
-      <TomatoLogo> Fresh Tomato </TomatoLogo>
+      <TomatoLogo> Fresh Tomato
+      <img width="96" height="96" src="https://img.icons8.com/doodle/96/000000/tomato--v1.png" alt="tomato--v1"/>
+      </TomatoLogo>
       </LogoContainer>
       <SearchBar placeholder="EX: 인사이드아웃2" />
       <MovieList />
