@@ -1,43 +1,40 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 const MovieListContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: center;
 `;
 
 const MovieItem = styled.div`
-  width: 18%;
   margin: 10px;
   padding: 10px;
   border: 1px solid #ccc;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  width: 200px;
+  text-align: center;
 `;
 
 const MovieTitle = styled.h2`
-  font-size: 1rem;
-  margin-bottom: 5px;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
 `;
 
 const MovieImage = styled.img`
-  width: 100%;
+  max-width: 100%;
   height: auto;
-  border-radius: 4px;
 `;
 
 const MovieList = () => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [perPage] = useState(20); // 한 페이지에 보여질 항목 수
   const navigate = useNavigate();
-
-  const handleClick = () => {
-    navigate('/detail/:id');
-  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -57,7 +54,21 @@ const MovieList = () => {
     };
 
     fetchData();
-  }, []);
+  }, [currentPage]);
+
+  const handleNextPage = () => {
+    setCurrentPage(currentPage + 1);
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleClick = (id) => {
+    navigate(`/detail/${id}`);
+  };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -75,12 +86,18 @@ const MovieList = () => {
     <div>
       <MovieListContainer>
         {movies.map((movie) => (
-          <MovieItem key={movie.id}>
+          <MovieItem key={movie.id} onClick={() => handleClick(movie.id)}>
             <MovieTitle>{movie.title_kor}</MovieTitle>
             <MovieImage src={movie.poster_url} alt={movie.title_kor} />
           </MovieItem>
         ))}
       </MovieListContainer>
+      <div>
+        <button onClick={handlePrevPage} disabled={currentPage === 1}>
+          이전 페이지
+        </button>
+        <button onClick={handleNextPage}>다음 페이지</button>
+      </div>
     </div>
   );
 };
