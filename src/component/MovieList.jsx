@@ -1,6 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import styled from 'styled-components';
+
+const MovieListContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+`;
+
+const MovieItem = styled.div`
+  width: 18%;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+`;
+
+const MovieTitle = styled.h2`
+  font-size: 1rem;
+  margin-bottom: 5px;
+`;
+
+const MovieImage = styled.img`
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+`;
 
 const MovieList = () => {
   const [movies, setMovies] = useState([]);
@@ -15,16 +42,10 @@ const MovieList = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          'https://port-0-minihackathon-12-lyec0qpi97716ac6.sel5.cloudtype.app/movie/list'
-        );
-        // API에서 가져온 영화 데이터를 변수에 저장
+        const response = await axios.get('https://port-0-minihackathon-12-lyec0qpi97716ac6.sel5.cloudtype.app/movie/list');
         let movieData = response.data;
-
-        // 처음 10개의 영화 데이터만 추출
-        movieData = movieData.slice(0, 10);
-
-        setMovies(movieData); // 전체 영화 데이터를 설정
+        movieData = movieData.slice(0, 20);
+        setMovies(movieData);
         setLoading(false);
       } catch (error) {
         console.error('에러 발생:', error);
@@ -50,19 +71,14 @@ const MovieList = () => {
 
   return (
     <div>
-      <ul style={{ display: 'flex', listStyle: 'none', padding: 0 }}>
+      <MovieListContainer>
         {movies.map((movie) => (
-          <li key={movie.id} style={{ margin: '0.5rem' }}>
-            <h2>{movie.title_kor}</h2>
-            <img
-              src={movie.poster_url}
-              alt={movie.title_kor}
-              style={{ maxWidth: '100%' }}
-            />
-            <button onClick={handleClick}>상세보기</button>
-          </li>
+          <MovieItem key={movie.id}>
+            <MovieTitle>{movie.title_kor}</MovieTitle>
+            <MovieImage src={movie.poster_url} alt={movie.title_kor} />
+          </MovieItem>
         ))}
-      </ul>
+      </MovieListContainer>
     </div>
   );
 };
