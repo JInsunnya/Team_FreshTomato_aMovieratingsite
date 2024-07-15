@@ -4,7 +4,7 @@ import styled from "styled-components";
 import axios from "axios";
 
 const Container = styled.div`
-  padding: 10px;
+  padding: 10px 0px 40px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,7 +12,7 @@ const Container = styled.div`
 
 const SearchInput = styled.input`
   width: 50%;
-  padding: 20px 10px;
+  padding: 20px 10px 20px;
   font-size: 1rem;
   border: 1px solid #ea8b8b;
   border-radius: 4px;
