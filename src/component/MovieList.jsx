@@ -52,7 +52,8 @@ const MovieList = () => {
           {row.map(movie => (
             <li key={movie.id} style={{ margin: '0.5rem' }}>
               <h2>{movie.title_kor}</h2>
-              <img src={movie.poster_url} alt={movie.title_kor} style={{ maxWidth: '70%' }} />
+              {/*이미지 로딩 주석처리*/}
+              {/*<img src={movie.poster_url} alt={movie.title_kor} style={{ maxWidth: '70%' }} />*/}
             </li>
           ))}
         </ul>
