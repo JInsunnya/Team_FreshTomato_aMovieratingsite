@@ -1,17 +1,23 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
 import './App.css';
-import React from 'react';
-import Detail from './detail.jsx';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Nav from './component/GY_Nav';
+import MovieList from './component/MovieList.jsx';
+import SearchBar from './component/SearchBar';
 
-const App = () => {
+function App() {
   return (
-    <div>
-      <h1>Main App Component</h1>
-      <Detail></Detail>
-    </div>
+    <>
+      <BrowserRouter>
+        <div className="nav_bar">
+          <Nav />
+        </div>
+        <div className="search_bar">
+          <SearchBar placeholder="EX: 인사이드아웃2" />
+        </div>
+        <MovieList />
+      </BrowserRouter>
+    </>
   );
-};
+}
 
 export default App;
