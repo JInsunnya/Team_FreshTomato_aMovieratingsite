@@ -49,7 +49,7 @@ function Detail() {
   return (
     <div>
       ddd
-      {/* <div>
+      <div>
         <h1>
           <span className="kortitle">{movie.title_kor}</span>
           <span className="engtitle">{movie.title_eng}</span>
@@ -121,7 +121,7 @@ function Detail() {
             </div>
           ))}
         </div>
-      </div> */}
+      </div>
     </div>
   );
 }
