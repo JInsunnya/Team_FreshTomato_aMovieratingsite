@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './index.css';
+import styled from 'styled-components';
 
 import Login from './user/login';
 import Register from './user/register';
@@ -9,10 +10,32 @@ import Nav from './component/GY_Nav';
 import MovieList from './component/MovieList';
 import SearchBar from './component/SearchBar';
 
+
+const TomatoBack = styled.div`
+  background-color: #ffffff;
+  min-height: 100vh;
+    `;
+
+const TomatoLogo = styled.h1`
+  color: tomato; 
+  font-size: 100px;
+  font-weight: 600;
+  //-webkit-text-stroke: 2px tomato;
+  display: flex;
+`
+
+const LogoContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`
+
 // 새로운 Home 컴포넌트 추가
 const Home = () => {
   return (
     <div>
+      <LogoContainer>
+      <TomatoLogo> Fresh Tomato </TomatoLogo>
+      </LogoContainer>
       <SearchBar placeholder="EX: 인사이드아웃2" />
       <MovieList />
     </div>
@@ -22,7 +45,10 @@ const Home = () => {
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Nav />,
+    element: (
+    <TomatoBack>
+      <Nav />
+    </TomatoBack>),
     children: [
       {
         path: '/',

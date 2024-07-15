@@ -42,7 +42,7 @@ const MovieList = () => {
 
   return (
     <div>
-      <h1>Movie List</h1>
+      
       <ul style={{ display: 'flex', listStyle: 'none', padding: 0 }}>
         {movies.map(movie => (
           <li key={movie.id} style={{ margin: '0.5rem' }}>
