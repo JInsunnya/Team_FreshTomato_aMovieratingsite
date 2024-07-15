@@ -26,12 +26,12 @@ export default function Login() {
           //onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
         />
-        <button>Login</button>
+        <button>로그인</button>
+        <LoginHelp>
+        <a href="">ID/PW 찾기</a>
+        <a href="">회원가입하기</a>
+        </LoginHelp>
       </LoginWindow>
-      <LoginHelp>
-        <a href="">Forgot ID/PW</a>
-        <a href={`/register`}>Create Account</a>
-      </LoginHelp>
     </LoginSpace>
     </div>
   )
