@@ -103,7 +103,7 @@ function Detail() {
             <div key={comment.id} className="commentbox2">
               <p>{comment.comment}</p>
               <p>{comment.nickname}</p>
-              <p>{comment.created_at}</p>
+              <p>{comment.content}</p>
             </div>
           ))}
         </div>
