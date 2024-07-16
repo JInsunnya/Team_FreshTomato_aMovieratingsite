@@ -48,6 +48,14 @@ function Detail() {
         }
       );
       console.log('댓글 달기', response.data);
+
+      const newComment = {
+        id: response.data.id,
+        comment: response.data.comment,
+        nickname: response.data.nickname,
+        content: response.data.content,
+      };
+
       setMovie((prevMovie) => ({
         ...prevMovie,
         comments: [...prevMovie.comments, response.data],
