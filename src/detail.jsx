@@ -7,6 +7,8 @@ function Detail() {
   const [movie, setMovie] = useState(null);
   const { id } = useParams();
   const [comment, setComment] = useState('');
+  const [posts, setPosts] = useState({});
+  const [token, setToken] = useState('');
 
   const apiCall = axios.create({
     baseURL: 'https://freshtomato.store/',
@@ -19,11 +21,56 @@ function Detail() {
         console.log(response);
         setMovie(response.data);
       } catch (error) {
-        console.log('Error movie data:', error);
+        console.log('Error movie', error);
       }
     };
     detailMovie();
   }, [id]);
+
+  const commentPost = async () => {
+    console.log({ token });
+    try {
+      const storedToken = localStorage.getItem('access');
+      console.log(storedToken);
+      if (!storedToken) {
+        console.log('저장된 토큰 없음.');
+        return;
+      }
+
+      const response = await apiCall.post(
+        `/Movie/movie_detail/${id}/comment/`,
+        { content: comment },
+        {
+          headers: {
+            Authorization: `Bearer ${storedToken}`,
+          },
+          withCredentials: true,
+        }
+      );
+      console.log('댓글 달기', response.data);
+      setMovie((prevMovie) => ({
+        ...prevMovie,
+        comments: [...prevMovie.comments, response.data],
+      }));
+      setPosts(response.data);
+      setComment('');
+    } catch (error) {
+      console.log('Error comment:', error);
+    }
+  };
+
+  // useEffect(() => {
+  //   const storedToken = localStorage.getItem('token');
+  //   setToken(storedToken);
+  // }, []);
+  useEffect(() => {
+    const storedToken = localStorage.getItem('access');
+    if (storedToken) {
+      setToken(storedToken);
+    } else {
+      console.log('토큰 없음');
+    }
+  }, []);
 
   const handleCommentChange = (event) => {
     setComment(event.target.value);
@@ -60,8 +107,8 @@ function Detail() {
               <p>{movie.release_date} 개봉</p>
             </div>
           </div>
-          <p>줄거리</p>
-          <p>{movie.plot}</p>
+          <p className="movie-info4">줄거리</p>
+          <p className="plot">{movie.plot}</p>
         </div>
       </div>
       <h3 className="top">인물 정보</h3>
@@ -88,14 +135,14 @@ function Detail() {
         </div>
       </div>
       <div className="comments">
-        <h3>한줄평</h3>
+        <h3 className="commenttitle">한줄평</h3>
         <input
           type="text"
           value={comment}
           onChange={handleCommentChange}
           className="textbox"
         />
-        <button className="button" onClick={comment}>
+        <button className="button" onClick={commentPost}>
           작성
         </button>
         <div className="commentbox1">
