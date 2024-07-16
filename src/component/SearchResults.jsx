@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import SearchBar from "./SearchBar"
 
 const MovieListContainer = styled.div`
   display: grid;
@@ -34,10 +35,19 @@ const SearchResultsPage = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const apiCall = axios.create({
     baseURL: 'https://freshtomato.store/',
   })
+
+  const handleSearch = (query) => {
+    navigate(`/search/${query}`);
+  };
+
+  const handleClick = (id) => {
+    navigate(`/detail/${id}`);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -74,9 +84,10 @@ const SearchResultsPage = () => {
 
   return (
     <div>
+      <SearchBar onSearch = {handleSearch}/> {/* searchbar 추가하기*/}
       <MovieListContainer>
         {searchResults.map((movie) => (
-          <MovieItem key={movie.id}>
+          <MovieItem key={movie.id} onClick = {() => handleClick(movie.id)}>
             <MovieTitle>{movie.title_kor}</MovieTitle>
             <MovieImage src={movie.poster_url} alt={movie.title_kor} />
             <p>{movie.title_eng}</p>
