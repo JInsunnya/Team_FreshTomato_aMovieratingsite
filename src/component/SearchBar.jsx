@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import styled from "styled-components";
 import axios from "axios";
 
+
 const Container = styled.div`
   padding: 10px 0px 40px;
   display: flex;
@@ -25,6 +26,19 @@ const SearchInput = styled.input`
   }
 `;
 
+const SearchClick = styled.button`
+  background-color: #ea8b8b;
+  color: rgb(255, 255, 255);
+  font-weight: 500;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  width: 80px;
+  height: 60px;
+`
+
+const SearchClickContainer = styled.div`
+  margin: 10px;`
 const SearchBar = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
@@ -63,14 +77,21 @@ const SearchBar = () => {
     <Container>
       <SearchInput
         type="search"
-        placeholder="Search for a movie..."
+        placeholder="EX: 인사이드아웃2"
         value={searchQuery}
         onChange={handleChange}
         className="search_input"
       />
-      <button onClick={handleSearch}>Search</button>
+      
+      <SearchClickContainer>
+      <SearchClick onClick={handleSearch}>Search</SearchClick>
+      </SearchClickContainer>
+      
+
       {loading && <div>Loading...</div>}
-      {error && <div>Error: {error.message}</div>}
+      {/*error && <div>Error: {error.message}</div>*/}
+      {error && <div>Error: 결과를 찾을 수 없습니다.</div>}
+
       <ul>
         {searchResults.map((movie) => (
           <li key={movie.id}>
