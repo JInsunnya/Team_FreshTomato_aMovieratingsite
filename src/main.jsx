@@ -10,6 +10,7 @@ import Nav from './component/GY_Nav';
 import MovieList from './component/MovieList';
 import SearchBar from './component/SearchBar';
 import Detail from './detail';
+import SearchResultsPage from './component/SearchResults';
 
 const TomatoBack = styled.div`
   background-color: #ffffff;
@@ -69,6 +70,10 @@ const router = createBrowserRouter([
       {
         path: '/detail/:id',
         element: <Detail/>,
+      },
+      {
+        path: '/search/:movieName', 
+        element: <SearchResultsPage/>
       },
     ],
   },
