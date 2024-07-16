@@ -30,6 +30,17 @@ const MovieImage = styled.img`
   height: auto;
 `;
 
+const ErrorContainer = styled.div`
+  display: flex;
+  justify-content: center; /* 수평 가운데 정렬 */
+  height: 100vh; /* 화면 전체 높이를 사용할 경우 */
+  text-align: center; /* 내용 가운데 정렬 */
+`
+
+const ErrorText = styled.h1`
+  color: Tomato;
+
+`
 const SearchResultsPage = () => {
   const { movieName } = useParams();
   const [searchResults, setSearchResults] = useState([]);
@@ -71,15 +82,29 @@ const SearchResultsPage = () => {
   }, [movieName]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <ErrorContainer>
+      <ErrorText>Loading...</ErrorText>
+      </ErrorContainer>;
   }
 
   if (error) {
-    return <div>에러 발생: {error.message}</div>;
+    return <div>
+      <SearchBar onSearch = {handleSearch}/>
+      <ErrorContainer>
+        <ErrorText>에러 발생: {error.message};</ErrorText>
+      </ErrorContainer>
+    </div>
+    
   }
 
   if (searchResults.length === 0) {
-    return <div>No movies found.</div>;
+    return <div>
+      <br/><br/>
+      <SearchBar onSearch = {handleSearch}/>
+      <ErrorContainer>
+      <ErrorText>No movies found.</ErrorText>
+      </ErrorContainer>
+      </div>;
   }
 
   return (
