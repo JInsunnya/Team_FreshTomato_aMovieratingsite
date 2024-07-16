@@ -101,9 +101,9 @@ function Detail() {
         <div className="commentbox1">
           {movie.comments.map((comment) => (
             <div key={comment.id} className="commentbox2">
-              <p>{comment.comment}</p>
-              <p>{comment.user.nickname}</p>
-              <p>{comment.created_at}</p>
+              <p>{comment.movie}</p>
+              <p>{comment.nickname}</p>
+              <p>{comment.content}</p>
             </div>
           ))}
         </div>
