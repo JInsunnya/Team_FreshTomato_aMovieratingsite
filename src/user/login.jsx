@@ -24,6 +24,8 @@ export default function Login() {
       console.error('에러: ', error)
       setUsername("")
       setPassword("")
+      //window.alert("Hello world!");
+      //alert("Hello world!");
       return error;
     }
   }

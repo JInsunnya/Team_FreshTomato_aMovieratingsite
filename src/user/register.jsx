@@ -28,6 +28,7 @@ export default function Register() {
       setPassword2("")
       setNickname("")
       localStorage.setItem("access", response.data.access);
+      return response.data;
     } catch (error) {
       return error;
     }
