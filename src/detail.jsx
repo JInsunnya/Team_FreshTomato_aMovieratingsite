@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './detailcss.css';
 
@@ -9,6 +9,7 @@ function Detail() {
   const [comment, setComment] = useState('');
   const [posts, setPosts] = useState({});
   const [token, setToken] = useState('');
+  const navigate = useNavigate();
 
   const apiCall = axios.create({
     baseURL: 'https://freshtomato.store/',
@@ -34,6 +35,8 @@ function Detail() {
       console.log(storedToken);
       if (!storedToken) {
         console.log('저장된 토큰 없음.');
+        alert("로그인이 필요합니다.")
+        navigate(`/Login`, {replace: true})
         return;
       }
 
