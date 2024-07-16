@@ -24,12 +24,39 @@ const MovieImage = styled.img`
   max-width: 100%;
   height: auto;
 `;
+
+
+const PageNav = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+
+  button {
+    background-color: tomato;
+    color: #FFF4EF;
+    border-color: #d43316;
+    border-style: solid;
+    margin: 20px;
+  }
+
+  ul{
+    margin: 5px;
+    padding: 10px;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    color: #5c1204;
+  }
+`
+
 const MovieList = () => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [perPage] = useState(20); // 한 페이지에 보여질 항목 수
+
   const navigate = useNavigate();
   useEffect(() => {
     const fetchData = async () => {
@@ -78,12 +105,13 @@ const MovieList = () => {
           </MovieItem>
         ))}
       </MovieListContainer>
-      <div>
+      <PageNav>
         <button onClick={handlePrevPage} disabled={currentPage === 1}>
           이전 페이지
         </button>
+        <ul>{currentPage}</ul>
         <button onClick={handleNextPage}>다음 페이지</button>
-      </div>
+      </PageNav>
     </div>
   );
 };
