@@ -1,33 +1,16 @@
 import React, { useEffect, useState } from 'react';
-// import { useLocation } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import './detailcss.css';
 
 function Detail() {
   const [movie, setMovie] = useState(null);
-  // const [posts, setPosts] = useState([]);
-  // const [token, setToken] = useState('');
-  // const { state } = useLocation();
-  // const navigate = useNavigate();
-  // const location = useLocation();
-  const [id, setId] = useState(1);
-  // const { id } = useParams();
+  const { id } = useParams();
   const [comment, setComment] = useState('');
-  // const Tofeed = (postId) => {
-  //   navigate(`/modifys`, { state: { id: postId } });
-  // };
-  // const id = state?.id || '';
 
   const apiCall = axios.create({
     baseURL: 'https://freshtomato.store/',
   });
-
-  // const handleClick = () => {
-  //   navigate(`/modify`);
-  // };
-
-  // console.log(token);
 
   useEffect(() => {
     const detailMovie = async () => {
@@ -40,15 +23,18 @@ function Detail() {
       }
     };
     detailMovie();
-  }, []);
+  }, [id]);
 
   const handleCommentChange = (event) => {
     setComment(event.target.value);
   };
 
+  if (!movie) {
+    return <div>Loading</div>;
+  }
+
   return (
     <div>
-      ddd
       <div>
         <h1>
           <span className="kortitle">{movie.title_kor}</span>

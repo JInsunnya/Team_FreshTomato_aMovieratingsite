@@ -39,9 +39,12 @@ const MovieList = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setLoading(true);
-        const response = await axios.get(`https://freshtomato.store/Movie/home/${currentPage}/`);
-        setMovies(response.data);
+        const response = await axios.get(
+          'https://port-0-minihackathon-12-lyec0qpi97716ac6.sel5.cloudtype.app/movie/list'
+        );
+        let movieData = response.data;
+        movieData = movieData.slice(0, 20);
+        setMovies(movieData);
         setLoading(false);
       } catch (error) {
         console.error('에러 발생:', error);
@@ -70,12 +73,15 @@ const MovieList = () => {
   if (loading) {
     return <div>Loading...</div>;
   }
+
   if (error) {
     return <div>에러 발생: {error.message}</div>;
   }
+
   if (movies.length === 0) {
     return <div>No movies found.</div>;
   }
+
   return (
     <div>
       <MovieListContainer>
@@ -87,10 +93,13 @@ const MovieList = () => {
         ))}
       </MovieListContainer>
       <div>
-        <button onClick={handlePrevPage} disabled={currentPage === 1}>이전 페이지</button>
+        <button onClick={handlePrevPage} disabled={currentPage === 1}>
+          이전 페이지
+        </button>
         <button onClick={handleNextPage}>다음 페이지</button>
       </div>
     </div>
   );
 };
+
 export default MovieList;
