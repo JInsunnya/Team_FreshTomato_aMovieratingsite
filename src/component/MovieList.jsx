@@ -39,9 +39,7 @@ const MovieList = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          'https://port-0-minihackathon-12-lyec0qpi97716ac6.sel5.cloudtype.app/movie/list'
-        );
+        const response = await axios.get('https://freshtomato.store/');
         let movieData = response.data;
         movieData = movieData.slice(0, 20);
         setMovies(movieData);
