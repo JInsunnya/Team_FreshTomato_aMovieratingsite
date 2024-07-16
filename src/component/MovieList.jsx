@@ -6,6 +6,7 @@ const MovieListContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  margin-top:20px;
 `;
 const MovieItem = styled.div`
   margin: 10px;
