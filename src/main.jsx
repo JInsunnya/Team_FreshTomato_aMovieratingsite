@@ -10,6 +10,7 @@ import Nav from './component/GY_Nav';
 import MovieList from './component/MovieList';
 import SearchBar from './component/SearchBar';
 import Detail from './detail';
+import Logout from './user/logout';
 import SearchResultsPage from './component/SearchResults';
 
 const TomatoBack = styled.div`
@@ -70,6 +71,10 @@ const router = createBrowserRouter([
       {
         path: '/detail/:id',
         element: <Detail/>,
+      },
+      {
+        path: '/Logout',
+        element: <Logout/>,
       },
       {
         path: '/search/:movieName', 
