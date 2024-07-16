@@ -11,7 +11,8 @@ const MovieListContainer = styled.div`
 const MovieItem = styled.div`
   margin: 10px;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #5ebc69;
+  background-color: #FFF4EF;
   border-radius: 4px;
   width: 200px;
   text-align: center;
@@ -35,9 +36,13 @@ const PageNav = styled.div`
   button {
     background-color: tomato;
     color: #FFF4EF;
-    border-color: #d43316;
+    border-color: white;
     border-style: solid;
+    border-radius: 30px;
+    width: 100px;
+    height: 60px;
     margin: 20px;
+    font-size: 15px;
   }
 
   ul{
@@ -107,10 +112,10 @@ const MovieList = () => {
       </MovieListContainer>
       <PageNav>
         <button onClick={handlePrevPage} disabled={currentPage === 1}>
-          이전 페이지
+          &lt;&lt;  이전
         </button>
         <ul>{currentPage}</ul>
-        <button onClick={handleNextPage}>다음 페이지</button>
+        <button onClick={handleNextPage}>다음  &gt;&gt;</button>
       </PageNav>
     </div>
   );

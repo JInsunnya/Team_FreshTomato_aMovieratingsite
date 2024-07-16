@@ -11,6 +11,7 @@ import MovieList from './component/MovieList';
 import SearchBar from './component/SearchBar';
 import Detail from './detail';
 import Logout from './user/logout';
+import SearchResultsPage from './component/SearchResults';
 
 const TomatoBack = styled.div`
   background-color: #ffffff;
@@ -74,6 +75,10 @@ const router = createBrowserRouter([
       {
         path: '/Logout',
         element: <Logout/>,
+      },
+      {
+        path: '/search/:movieName', 
+        element: <SearchResultsPage/>
       },
     ],
   },
