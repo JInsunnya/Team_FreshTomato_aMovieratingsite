@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import styled from "styled-components";
 import axios from "axios";
+import {useNavigate} from "react-router-dom";
 
 
 const Container = styled.div`
@@ -39,33 +40,41 @@ const SearchClick = styled.button`
 
 const SearchClickContainer = styled.div`
   margin: 10px;`
+
+const MovieListContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top:20px;
+`;
+const MovieItem = styled.div`
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 200px;
+  text-align: center;
+`;
+
+const MovieTitle = styled.h2`
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+`;
+
+const MovieImage = styled.img`
+  max-width: 100%;
+  height: auto;
+`;
+
+
 const SearchBar = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
-  const handleSearch = async () => {
-    try {
-      setLoading(true);
-      const response = await axios.get(
-        `https://freshtomato.store/Movie/search/${searchQuery}/`,
-        {timeout: 8000}
-      );
-      setSearchResults(response.data);
-      setLoading(false);
-    } catch (error) {
-        if (axios.isCancel(error)) {
-            console.log("요청 취소:", error.message);
-          } else if (error.response) {
-            console.error("서버 응답 오류:", error.response.data);
-            setError(error.response.data);
-          } else if (error.request) {
-            console.error("요청 오류:", error.request);
-          } else {
-            console.error("오류 발생:", error.message);
-          }
-          setLoading(false);
+  const handleSearch = () => {
+    if (searchQuery.trim()) {
+      navigate(`/search/${encodeURIComponent(searchQuery)}`);
+      console.log(`Navigating to: /search/${encodedQuery}`);
     }
   };
 
@@ -86,22 +95,7 @@ const SearchBar = () => {
       <SearchClickContainer>
       <SearchClick onClick={handleSearch}>Search</SearchClick>
       </SearchClickContainer>
-      
-
-      {loading && <div>Loading...</div>}
-      {/*error && <div>Error: {error.message}</div>*/}
-      {error && <div>Error: 결과를 찾을 수 없습니다.</div>}
-
-      <ul>
-        {searchResults.map((movie) => (
-          <li key={movie.id}>
-            <h2>{movie.title_kor}</h2>
-            <p>{movie.title_eng}</p>
-            <img src={movie.poster_url} alt={movie.title_kor} style={{ maxWidth: '100px' }} />
-            <p>Rating: {movie.rating}</p>
-          </li>
-        ))}
-      </ul>
+    
     </Container>
   );
 };
