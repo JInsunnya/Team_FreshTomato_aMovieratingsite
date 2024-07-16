@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import { RegisterSpace, RegisterInput } from "./styles-cr";
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 //import { Cookies } from "react-cookie";
 
 //const [cookies, setCookies, removeCookie] = useCookies();
@@ -10,6 +11,8 @@ export default function Register() {
   const [password1, setPassword1] = useState("")
   const [password2, setPassword2] = useState("")
   const [nickname, setNickname] = useState("")
+  const navigate = useNavigate();
+  navigate(`/`, {replace: true});
 
   const api = axios.create({
     baseURL:
@@ -32,6 +35,8 @@ export default function Register() {
       setPassword2("")
       setNickname("")
       localStorage.setItem("access", response.data.access);
+      alert("회원가입이 완료되었습니다.");
+
     } catch (error) {
       return error;
     };
