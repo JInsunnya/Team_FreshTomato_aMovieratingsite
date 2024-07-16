@@ -1,16 +1,31 @@
 import React, {useState} from "react";
 import {LoginSpace, LoginWindow, LoginHelp} from "./styles-cr";
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
+// import { Cookies } from "react-cookie";
+
+// const cookies = new Cookies();
+
+// export const setCookie = (name, value) => {
+//   return cookies.set(name, value);
+// };
+
+// export const getCookie = (name) => {
+//   return cookies.set(name);
+// };
 
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
   const api = axios.create({
     baseURL:
       'https://freshtomato.store/',
   });
   
   const login = async () => {
+
     try {
       const response = await api.post("/dj/login/", {
         username: username,
@@ -20,10 +35,13 @@ export default function Login() {
       setUsername("")
       setPassword("")
       localStorage.setItem("access", response.data.access)
+      navigate(`/`, {replace: true});
+      //setCookie("access", response.data.access)
     } catch (error) {
       console.error('에러: ', error)
       setUsername("")
       setPassword("")
+      alert("로그인에 실패하였습니다");
       return error;
     }
   }
