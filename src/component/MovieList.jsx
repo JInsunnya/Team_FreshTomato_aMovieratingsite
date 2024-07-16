@@ -34,7 +34,9 @@ const MovieList = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`https://freshtomato.store/Movie/home/${currentPage}/`);
+        const response = await axios.get(
+          `https://freshtomato.store/Movie/home/${currentPage}/`
+        );
         setMovies(response.data);
         setLoading(false);
       } catch (error) {
@@ -76,7 +78,9 @@ const MovieList = () => {
         ))}
       </MovieListContainer>
       <div>
-        <button onClick={handlePrevPage} disabled={currentPage === 1}>이전 페이지</button>
+        <button onClick={handlePrevPage} disabled={currentPage === 1}>
+          이전 페이지
+        </button>
         <button onClick={handleNextPage}>다음 페이지</button>
       </div>
     </div>
