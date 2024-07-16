@@ -13,8 +13,10 @@ const MovieListContainer = styled.div`
 `;
 
 const MovieItem = styled.div`
+  margin: 10px;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #5ebc69;
+  background-color: #FFF4EF;
   border-radius: 4px;
   width: 200px;
   text-align: center;
