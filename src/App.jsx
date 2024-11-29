@@ -8,15 +8,13 @@ import { useState } from 'react';
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   useEffect(() => {
-    const accessToken = localStorage.getItem("access")
+    const accessToken = localStorage.getItem('access');
     if (accessToken) {
       setIsLoggedIn(true);
     }
-}, []);
+  }, []);
 
-  return (
-    <p>Hello</p>
-  )
+  return <p>Hello</p>;
 }
 
 export default App;
